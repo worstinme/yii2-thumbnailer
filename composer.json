@@ -1,0 +1,25 @@
+{
+	"name": "worstinme/yii2-thumbnailer",
+	"description": "Auto thumbnailer for Yii2",
+	"keywords": ["yii2", "thumbnailer", "imagine"],
+	"type": "yii2-extension",
+	"license": "MIT",
+	"support": {
+		"source": "https://github.com/worstinme/yii2-thumbnailer"
+	},
+	"authors": [
+        {
+            "name": "Evgeny Zakirov",
+            "homepage" : "https://github.com/worstinme"
+        }
+	],
+	"require": {
+        "yiisoft/yii2": ">=2.0.6",
+        "yiisoft/yii2-imagine": "~2.0.0"
+    },
+	"autoload": {
+		"psr-4": {
+            "worstinme\\thumbnailer\\": ""
+        }
+	}
+}
