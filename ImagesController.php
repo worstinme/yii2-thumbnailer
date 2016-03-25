@@ -10,6 +10,8 @@ use Yii;
 
 class ImagesController extends \yii\web\Controller
 {
+  
+
     public function actionThumbnails($width,$height,$image)
     {
 
@@ -27,21 +29,36 @@ class ImagesController extends \yii\web\Controller
             $dir = implode("/",$array);
 
             if (!is_dir($dir)) {
-                mkdir($dir, 0777, true);
+                mkdir($dir, 0700, true);
             }
 
             if (is_dir($dir)) {
 
-                $image = Image::thumbnail($image_path, $width, $height)
-                            ->save($thumbnail, ['quality' => 85]);
+                try {
+        
+                    $this->createThumbnail($image_path, $thumbnail, $width, $height);
+
+                } catch (\Exception $ex) {
+
+                    echo $ex;
+                }
 
             }
 
-            return $image;
+            return $this->refresh();
 
     	}  
     	
-		throw new NotFoundHttpException('The requested page does not exist.');
+		else throw new NotFoundHttpException('The requested page does not exist.');
     	
     }
+
+    protected function createThumbnail($image_path, $thumbnail, $width, $height) {
+
+        Image::thumbnail($image_path, $width, $height, \Imagine\Image\ManipulatorInterface::THUMBNAIL_INSET)
+            ->save($thumbnail, ['quality'=>85]);
+
+        return true;
+    }
 }
+
